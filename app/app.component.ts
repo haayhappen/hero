@@ -8,22 +8,32 @@ export class Hero {
 @Component({
     selector: 'my-app',
     template: `
+    <!-- One way Binding of the title property, defined in the AppComponent Class! -->
     <h1>{{title}}</h1>
 
+    <!-- *ngIf removes the hero detail from the DOM as long as selectedHero isn't set! -->
+    <div *ngIf="selectedHero">
     <h2>{{selectedHero.name}} details!</h2>
-    <div>
-        <label>id: </label>{{selectedHero.id}}
-    </div>
+    <div><label>id: </label>{{selectedHero.id}}</div>
     <div>
         <label>name: </label>
+        <!-- This input works as a two way binding! -->
         <input [(ngModel)]="selectedHero.name" placeholder="name"/>
     </div>
+    </div>
+
     
         <h2>My Heroes</h2>
         <ul class="heroes">
-            <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+
+        <!-- The quoted text assigned to ngFor means “take each hero in the heroes array, 
+        store it in the local hero variable, and make it available to the corresponding template instance”. 
+        / The let keyword before "hero" defines hero as a template input variable -->
+
+            <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
                 <span class="badge">{{hero.id}}</span> {{hero.name}}
             </li>
+
         </ul>
     `,
 
@@ -83,11 +93,6 @@ export class Hero {
 
 export class AppComponent {
     title = 'Tour of Heroes';
-
-    hero: Hero = {
-        id: 1,
-        name: 'Windstorm'
-    };
 
     heroes = HEROES;
 
