@@ -1,30 +1,23 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero';
 
-
+ 
 
 @Component({
     selector: 'my-app',
     template: `
-<my-hero-detail [hero]="selectedHero"></my-hero-detail>
+  <h1>{{title}}</h1>
+  <h2>My Heroes</h2>
+  <ul class="heroes">
+    <li *ngFor="let hero of heroes"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+  </ul>
+  <my-hero-detail [hero]="selectedHero"></my-hero-detail>
+`,
 
-
-    <!-- One way Binding of the title property, defined in the AppComponent Class! -->
-    <h1>{{title}}</h1>
-
-        <h2>My Heroes</h2>
-        <ul class="heroes">
-
-        <!-- The quoted text assigned to ngFor means “take each hero in the heroes array, 
-        store it in the local hero variable, and make it available to the corresponding template instance”. 
-        / The let keyword before "hero" defines hero as a template input variable -->
-
-            <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-                <span class="badge">{{hero.id}}</span> {{hero.name}}
-            </li>
-
-        </ul>
-    `,
 
     styles: [`
   .selected {
