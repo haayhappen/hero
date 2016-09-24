@@ -1,28 +1,17 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero';
 
-export class Hero {
-    id: number;
-    name: string;
-}
+
 
 @Component({
     selector: 'my-app',
     template: `
+<my-hero-detail [hero]="selectedHero"></my-hero-detail>
+
+
     <!-- One way Binding of the title property, defined in the AppComponent Class! -->
     <h1>{{title}}</h1>
 
-    <!-- *ngIf removes the hero detail from the DOM as long as selectedHero isn't set! -->
-    <div *ngIf="selectedHero">
-    <h2>{{selectedHero.name}} details!</h2>
-    <div><label>id: </label>{{selectedHero.id}}</div>
-    <div>
-        <label>name: </label>
-        <!-- This input works as a two way binding! -->
-        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-    </div>
-    </div>
-
-    
         <h2>My Heroes</h2>
         <ul class="heroes">
 
